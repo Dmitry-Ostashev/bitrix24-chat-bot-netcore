@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http.Formatting;
-using System.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +20,7 @@ namespace ChatBotNetCore.Controllers {
         public ChatBotController(IHostingEnvironment hostingEnvironment, IConfiguration configuration) {
             this.hostingEnvironment = hostingEnvironment;
             this.configuration = configuration;
+
             messageProcessor = new MessageProcessor(hostingEnvironment, configuration);
         }
         [Route("message")]
@@ -30,6 +29,7 @@ namespace ChatBotNetCore.Controllers {
             IFormCollection messageData = Request.Form;
             object result = null;
             object applicationToken = messageData.FirstOrDefault(s => s.Key == "auth[application_token]");
+
             if (applicationToken == null) {
                 return Unauthorized();
             }
@@ -43,7 +43,6 @@ namespace ChatBotNetCore.Controllers {
                 }
             }
 
-            string data = messageData["data"];
             return Ok(result);
         }
         [Route("echo")]

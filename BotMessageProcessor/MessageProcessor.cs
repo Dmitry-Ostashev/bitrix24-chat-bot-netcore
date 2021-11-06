@@ -12,16 +12,16 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-
-const UNKNOWN_COMMAND_MESSAGE = "Unknown command! Please type [send=info]info[/send] to get a list of all commands.";
-const COMMAND_ERROR_MESSAGE = "Ann error occurred during the command execution. Please try again later.";
 
 namespace ChatBotNet.BotMessageProcessor {
+    public static class BotEvents {
+        public const string OnInstall = "ONAPPINSTALL";
+        public const string OnMessageAdd = "ONIMBOTMESSAGEADD";
+    }
     public class MessageProcessor {
+        private const string UNKNOWN_COMMAND_MESSAGE = "Unknown command! Please type [send=info]info[/send] to get a list of all commands.";
+        private const string COMMAND_ERROR_MESSAGE = "Ann error occurred during the command execution. Please try again later.";
+
         private string accessToken;
         private JObject commandListConfig;
         private string bitrixBaseUrl;
@@ -194,13 +194,13 @@ namespace ChatBotNet.BotMessageProcessor {
             string url = configuration.GetSection("BotSettings:chatBotUrl").Value;
             string ev = messageData["event"];
             switch (ev) {
-                case "ONIMBOTMESSAGEADD":
+                case BotEvents.OnMessageAdd:
                     object result = ProcessMessageAdd(messageData);
                     if (isTestMode) {
                         return result;
                     }
                     break;
-                case "ONAPPINSTALL": return ProcessMessageInstall(url);
+                case BotEvents.OnInstall: return ProcessMessageInstall(url);
             }
             return null;
         }
