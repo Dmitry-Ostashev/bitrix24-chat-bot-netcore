@@ -26,13 +26,6 @@ namespace ChatBotNetCore
             var host = new WebHostBuilder()
                 .UseConfiguration(config)
                 .UseKestrel()
-                //.UseKestrel(options => {
-                    //options.Listen(IPAddress.Loopback, 5000);  // http:localhost:5000
-                    //options.Listen(IPAddress.Any, 80);         // http:*:80
-                    //options.Listen(IPAddress.Any, 5001, listenOptions => {
-                    //    listenOptions.UseHttps("C:\\ProgramData\\win-acme\\httpsacme-v01.api.letsencrypt.org\\api.maxis-it.ru-all.pfx", "");
-                    //});
-                //})
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .Build();
