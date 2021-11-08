@@ -1,0 +1,28 @@
+﻿{
+  "defaultCommand": "info",
+  "commandList": [
+    {
+      "name": "info",
+      "restCommand": "",
+      "description": "Get commands list",
+      "args": [],
+      "defaultResponse": "I am John, chat-bot!"
+    },
+    {
+      "name": "deal report",
+      "action": "dealreport",
+      "description": "Get the deal report",
+      "args": [ "number" ],
+      "resultItems": [ "number", "date", "customer" ],
+      "defaultResponse": "Command is not supported"
+    },
+    {
+      "name": "invoice info",
+      "action": "invoiceinfo",
+      "description": "Get the invoice info",
+      "args": [ "number" ],
+      "resultItems": [ "number", "date", "customer" ],
+      "defaultResponse": "Command is not supported"
+    }
+  ]
+}
